@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Atif 1st Site</title>
+  <meta name="description" content="A clean, responsive starter website template." />
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    /* ========== CSS RESET (mini) ========== */
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color: #0f172a; background: #f8fafc; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ========== THEME ========== */
+    :root {
+      --bg: #f8fafc;         /* slate-50 */
+      --card: #ffffff;        /* white */
+      --text: #0f172a;        /* slate-900 */
+      --muted: #475569;       /* slate-600 */
+      --brand: #2563eb;       /* blue-600 */
+      --brand-700: #1d4ed8;   /* blue-700 */
+      --ring: rgba(37, 99, 235, 0.35);
+      --shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+      --radius: 16px;
+    }
+
+    .container { width: min(1100px, 92%); margin-inline: auto; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; background: var(--brand); color:#fff; border:none; padding:.8rem 1.1rem; border-radius: 999px; font-weight: 600; cursor:pointer; box-shadow: var(--shadow); transition: transform .15s ease, background .15s ease; }
+    .btn:hover { background: var(--brand-700); transform: translateY(-1px); }
+    .btn.outline { background: #fff; color: var(--brand); border: 2px solid var(--brand); }
+
+    /* ========== HEADER ========== */
+    header { position: sticky; top: 0; z-index: 50; background: rgba(248, 250, 252, .75); backdrop-filter: blur(12px); border-bottom: 1px solid #e2e8f0; }
+    .nav { display:flex; align-items:center; justify-content:space-between; padding: .9rem 0; }
+    .logo { display:flex; align-items:center; gap:.6rem; font-weight:800; letter-spacing:.2px; }
+    .logo-circle { width:28px; height:28px; border-radius:50%; background: radial-gradient(100% 100% at 70% 20%, #fffb00dc, #df0000); box-shadow: inset 0 0 0 2px rgba(252, 104, 104, 0.5); }
+    nav ul { display:flex; gap:1rem; list-style:none; }
+    nav a { padding:.5rem .75rem; border-radius: 10px; color: var(--muted); font-weight: 600; }
+    nav a:hover { background:#e2e8f0; color: var(--text); }
+    .menu-toggle { display:none; border:none; background:transparent; font-size:1.4rem; }
+
+    /* ========== HERO ========== */
+    .hero { padding: 72px 0 48px; }
+    .hero-inner { display:grid; grid-template-columns: 1.1fr .9fr; gap: 36px; align-items:center; }
+    .eyebrow { display:inline-block; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color: var(--brand); font-weight:700; }
+    .title { font-size: clamp(2rem, 3.6vw + 1rem, 3.5rem); line-height:1.1; margin:.5rem 0; }
+    .subtitle { color: var(--muted); font-size: clamp(1rem, .6vw + .9rem, 1.2rem); max-width: 55ch; }
+    .cta-row { margin-top: 1.25rem; display:flex; gap:.75rem; flex-wrap:wrap; }
+
+    .hero-card { background: var(--card); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); border:1px solid #e2e8f0; }
+    .stats { display:grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 10px; }
+    .stat { text-align:center; background:#f1f5f9; border-radius: 12px; padding: 14px; }
+    .stat b { font-size:1.2rem; }
+
+    /* ========== FEATURES ========== */
+    .section { padding: 56px 0; }
+    .section h2 { font-size: clamp(1.6rem, 1.4vw + 1rem, 2.2rem); margin: 0 0 .5rem; }
+    .section p.lead { color: var(--muted); max-width: 65ch; }
+
+    .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 22px; }
+    .card { background: var(--card); border: 1px solid #e2e8f0; border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .card h3 { margin:.2rem 0 .4rem; }
+    .badge { display:inline-block; font-size:.75rem; padding:.2rem .5rem; border-radius: 999px; background:#e0e7ff; color:#3730a3; font-weight:700; }
+
+    /* ========== ABOUT ========== */
+    .about { display:grid; grid-template-columns: 1fr 1.2fr; gap: 26px; align-items:center; }
+    .about img { border-radius: var(--radius); box-shadow: var(--shadow); border:1px solid #e2e8f0; }
+
+    /* ========== CONTACT ========== */
+    form { display:grid; gap:12px; margin-top: 16px; }
+    input, textarea { width: 100%; padding: .9rem 1rem; border-radius: 12px; border:1px solid #cbd5e1; background:#fff; font: inherit; }
+    input:focus, textarea:focus { outline:none; border-color: var(--brand); box-shadow: 0 0 0 4px var(--ring); }
+    label { font-weight: 600; }
+
+    /* ========== FOOTER ========== */
+    footer { padding: 32px 0 60px; color: var(--muted); }
+    .foot { display:flex; justify-content:space-between; gap: 16px; align-items:center; flex-wrap: wrap; }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .about { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      nav ul { display: none; position: absolute; right: 4%; top: 64px; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 8px; box-shadow: var(--shadow); }
+      nav ul.open { display:block; }
+      .menu-toggle { display:block; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ========== HEADER ========== -->
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo" aria-label="Home">
+        <span class="logo-circle" aria-hidden="true"></span>
+        <span>Atif 1st Site</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Toggle menu" id="menuBtn">☰</button>
+
+      <nav>
+        <ul id="menu">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a class="btn" href="#contact">Get Started</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <span class="eyebrow">Welcome</span>
+        <h1 class="title">My name is Atif,</h1>
+        <p class="subtitle">I read in 8th class in Fazaia degree college. i live in shorkot. and my age is 13 years. here's some information about me.</p>
+        <div class="cta-row">
+          <a class="btn" href="#features">Explore Features</a>
+          <a class="btn outline" href="#about">Learn More</a>
+        </div>
+      </div>
+
+      <div class="hero-card" aria-label="Quick stats and highlights">
+        <img src="https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?q=80&w=1200&auto=format&fit=crop" alt="Abstract colorful shapes" />
+        <div class="stats" role="list" aria-label="Site stats">
+          <div class="stat" role="listitem"><b>Atif Television(tv)</b><div>very best qualitie</div></div>
+          <div class="stat" role="listitem"><b>Atif</b><div>TV</div></div>
+          <div class="stat" role="listitem"><b>Atif bought it of </b><div>1,000,000</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURES ========== -->
+  <section class="section" id="features">
+    <div class="container">
+      <h2>Why this is website is? </h2>
+      <p class="lead">This is a simple blog web site made by atif. and its my practice web site which is maked during my learnings and practices.</p>
+
+      <div class="grid" role="list">
+        <article class="card" role="listitem">
+          <span class="badge">Education</span>
+          <h3>From where i got education of making websites?</h3>
+          <p>I got the Education of making website in HTML and CSS from Apna college a chanel on youtube in 15 days.</p>
+        </article>
+
+        <article class="card" role="listitem">
+          <span class="badge">Website idea</span>
+          <h3>From where i got the idea of making websites?</h3>
+          <p>I got the Idea of making websites from my father. and when i started this education i get more intrested to it.</p>
+        </article>
+
+        <article class="card" role="listitem">
+          <span class="badge">Time</span>
+          <h3>How many time i give to full course to web dvelopment?</h3>
+          <p>I understand the full course in 15 days in winter vacations. where i watch 3 videos per the total classes are 46 .</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="section" id="about">
+    <div class="container about">
+      <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop" alt="Laptop with code on screen" />
+      <div>
+        <h2>This is delecious food made by Atif shah!</h2>
+        <p class="lead">How i made This:</p>
+        <ul>
+          <li>First i took salad, wash it and add veniger on it.</li>
+          <li>then, I took fried chicken from fridge. and cook it in owen</li>
+          <li>Then, I add mayonise and spread mint on it.</li>
+          <li>And Atif's delicious recipie made!</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p class="lead">Have a question or want to work together? Send a message below.</p>
+
+      <form id="contactForm" novalidate>
+        <div>
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="shah g" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="a*****@gmail.com" required />
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Send messege to great Atif!..." required></textarea>
+        </div>
+        <button class="btn" type="submit">Send Message</button>
+        <p id="formStatus" role="status" aria-live="polite" class="lead" style="display:none; margin-top:.5rem;"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="container foot">
+      <div class="logo"><span class="logo-circle" aria-hidden="true"></span><span>Atif 1st Site</span></div>
+      <div>© <span id="year"></span> Atif 1st Site. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const menu = document.getElementById('menu');
+    menuBtn?.addEventListener('click', () => menu.classList.toggle('open'));
+
+    // Current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple form handling (front-end only)
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      // Basic validation
+      if (!data.name || !data.email || !data.message) {
+        status.style.display = 'block';
+        status.textContent = 'Please fill out all fields.';
+        return;
+      }
+
+      // Simulate a successful submit
+      status.style.display = 'block';
+      status.textContent = 'Thanks! Your message has been sent.';
+      form.reset();
+    });
+  </script>
+</body>
+</html>
